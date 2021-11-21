@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("messages.proto", :syntax => :proto3) do
     add_message "ruby_tracker.tracking.User" do
@@ -52,7 +53,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :user, :message, 2, "ruby_tracker.tracking.User"
       optional :client, :message, 3, "ruby_tracker.tracking.Client"
-      repeated :properties, :message, 4, "ruby_tracker.tracking.Property"
+      optional :sent_at, :message, 4, "google.protobuf.Timestamp"
+      repeated :properties, :message, 5, "ruby_tracker.tracking.Property"
     end
     add_message "ruby_tracker.tracking.EventResponse" do
       optional :session_id, :string, 1

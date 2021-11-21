@@ -24,7 +24,7 @@ class TrackingController < ::Gruf::Controllers::Base
     session_id = request.metadata['session_id']
     # Handle event stream
     request.messages do |event|
-      puts event.user.stranger_id
+      puts "Sent at: #{Time.at(event.sent_at.seconds, event.sent_at.nanos / 10**6)}, received at: #{Time.now}"
     end
 
     RubyTracker::Tracking::EventResponse.new session_id: session_id, status: 0

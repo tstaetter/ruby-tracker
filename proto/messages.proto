@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package ruby_tracker.tracking;
 
+import "google/protobuf/timestamp.proto";
+
 // User performing events
 message User {
   // stranger_id is used when the user can't be identified
@@ -69,7 +71,8 @@ message Event {
   string name = 1;
   User user = 2;
   Client client = 3;
-  repeated Property properties = 4;
+  google.protobuf.Timestamp sent_at = 4;
+  repeated Property properties = 5;
 }
 
 // EventResponse is returned when the client ends it's stream
