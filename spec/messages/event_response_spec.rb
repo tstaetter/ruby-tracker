@@ -7,7 +7,7 @@ describe RubyTracker::Tracking::EventResponse do
     it 'can create a response w/ valid parameters' do
       expect do
         RubyTracker::Tracking::EventResponse.new session_id: SecureRandom.uuid,
-                                                 status: Tracking::ResponseStatus::UNKNOWN,
+                                                 status: Service::ResponseStatus::UNKNOWN,
                                                  message: 'lorem ipsum'
       end.to_not raise_error
     end

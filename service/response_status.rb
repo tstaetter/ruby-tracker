@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Tracking
+module Service
   # Constants defining response states
   module ResponseStatus
     UNKNOWN = -1
