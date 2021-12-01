@@ -66,6 +66,13 @@ message Property {
   string value = 2;
 }
 
+// The session message
+message Session {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  optional google.protobuf.Timestamp finished_at = 3;
+}
+
 // The event object
 message Event {
   string name = 1;

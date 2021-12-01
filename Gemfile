@@ -8,6 +8,7 @@ gem 'dotenv'
 gem 'gruf', '~> 2.10'
 gem 'mongoid', '~> 7.3.3'
 gem 'nanites', git: 'https://github.com/tstaetter/nanites', branch: 'main'
+gem 'rubocop'
 
 group :development, :test do
 end
