@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package ruby_tracker.tracking;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+message Metadata {
+  // must be a UUID
+  string id = 1;
+  // Define the timestamp the message was sent by the client
+  google.protobuf.Timestamp sent_at = 2;
+}
+
+// results in a RubyTracker identifier (gid://rt/<Type>/<UUID>)
+message ObjectIdentifier {
+  enum ObjectType {
+    User = 0;
+    Resource = 1;
+    Association = 2;
+  }
+
+  ObjectType type = 1;
+  string uuid = 2;
+}
+
+message Interaction {
+  string type = 2;
+
+  message Source {
+    ObjectIdentifier id = 1;
+    // Optional properties added to the Source (user/resource)
+    map<string, google.protobuf.Any> properties = 2;
+  }
+
+  message Target {
+    ObjectIdentifier id = 1;
+    // Optional properties added to the Target (user/resource)
+    map<string, google.protobuf.Any> properties = 2;
+  }
+
+  Source source = 3;
+  Target target = 4;
+  // Optional properties added to the association
+  map<string, google.protobuf.Any> properties = 5;
+}
+
+message Enrichment {
+  // target definition, maybe one of 'User', 'Resource' or 'Association'
+  ObjectIdentifier target = 2;
+  // map of properties to enrich the target
+  map<string, google.protobuf.Any> properties = 3;
+}
+
+message EventStreamRequest {
+  Metadata _meta = 1;
+
+  oneof action {
+    Interaction interaction = 2;
+    Enrichment enrichment = 3;
+  }
+}
